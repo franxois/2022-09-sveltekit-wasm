@@ -1,14 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import init from 'wasm';
+	import * as wasmModule from 'wasm/wasm_bg.wasm';
 
 	export let data: PageData;
 
-	let addResult: number;
-
-	init().then((instance) => {
-		addResult = instance.add(1, 2);
-	});
+	let addResult: number = wasmModule.add(1, 2);
 </script>
 
 <h1>Welcome to SvelteKit</h1>
