@@ -1,0 +1,12 @@
+{
+  "name": "2022-09-sveltekit",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "pnpm:devPreinstall": "cd packages/wasm ; wasm-pack build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
