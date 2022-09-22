@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "pnpm:devPreinstall": "cd packages/wasm ; wasm-pack build"
+    "pnpm:devPreinstall": "cd packages/wasm ; wasm-pack build --target web"
   },
   "keywords": [],
   "author": "",
