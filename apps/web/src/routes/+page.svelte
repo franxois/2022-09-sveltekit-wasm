@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import init from "wasm/wasm_bg.wasm?init"
+	import type {add} from "wasm"
 
 	export let data: PageData;
 
 	let addResult : number
 
 	init({}).then(( instance )=>{
-		addResult = instance.exports.add(1,2)
+		addResult = (instance.exports.add as typeof add )(1,2)
 	})
 
 </script>
