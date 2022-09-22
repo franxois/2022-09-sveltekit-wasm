@@ -9,10 +9,11 @@
 	init({}).then(( instance )=>{
 		addResult = instance.exports.add(1,2)
 	})
+
 </script>
 
 <h1>Welcome to SvelteKit</h1>
 <ul>
 	<li>{data.message} from {data.source}</li>
-	<li>add(1,2) from wasm = {addResult}</li>
+	<li>{addResult} from wasm.add(1,2)</li>
 </ul>
