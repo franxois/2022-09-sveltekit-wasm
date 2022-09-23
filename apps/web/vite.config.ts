@@ -6,6 +6,9 @@ const config: UserConfig = {
 	plugins: [sveltekit(), wasm()],
 	build: {
 		target: 'esnext'
+	},
+	server: {
+		fs: { allow: ['../../packages/wasm/pkg'] }
 	}
 };
 
