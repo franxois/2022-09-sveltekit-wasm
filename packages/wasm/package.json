@@ -1,0 +1,14 @@
+{
+  "name": "wasm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "wasm-pack build --target web"
+  },
+  "files": [
+    "pkg"
+  ],
+  "module": "pkg/wasm.js",
+  "types": "pkg/wasm.d.ts",
+  "sideEffects": false
+}
