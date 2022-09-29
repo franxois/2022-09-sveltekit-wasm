@@ -4,9 +4,14 @@
   "description": "",
   "private": true,
   "scripts": {
-    "pnpm:devPreinstall": "cd packages/wasm ; wasm-pack build --target web"
+    "pnpm:devPreinstall": "pnpm run wasm:build",
+    "wasm:build": "cd packages/wasm ; pnpm run build",
+    "dev": "turbo run dev --parallel"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^1.5.3"
+  }
 }
