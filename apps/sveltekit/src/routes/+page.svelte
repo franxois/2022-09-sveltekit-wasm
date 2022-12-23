@@ -4,9 +4,9 @@
 
 	export let data: PageData;
 
-	let wasmMessage: String;
+	let wasmMessage: string;
 
-	let backendMessage: String;
+	let backendMessage: string;
 
 	init().then(() => {
 		wasmMessage = get_message();
