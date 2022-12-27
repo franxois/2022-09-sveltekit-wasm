@@ -12,7 +12,16 @@
 		wasmMessage = get_message();
 	});
 
-	fetch('/backend/hello')
+	if (navigator.serviceWorker.controller?.state === 'activated')
+		console.log('Service worker installed');
+	else {
+		console.log('Service worker not installed, please reload');
+		setTimeout(() => {
+			location.reload();
+		}, 500);
+	}
+
+	fetch('/api/hello')
 		.then((response) => response.json())
 		.then((data) => {
 			backendMessage = data.message;

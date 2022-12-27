@@ -6,7 +6,7 @@ console.log({ build, files, prerendered, version });
 
 self.addEventListener('fetch', (event) => {
 	if (event instanceof FetchEvent) {
-		if (event.request.url.endsWith('/backend/hello')) {
+		if (event.request.url.endsWith('/api/hello')) {
 			event.respondWith(
 				new Response(JSON.stringify({ message: 'Hello from Service Worker' }), {
 					headers: { 'content-type': 'text/json' }
