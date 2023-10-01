@@ -4,8 +4,9 @@
   "description": "",
   "private": true,
   "scripts": {
-    "pnpm:devPreinstall": "pnpm run wasm:build",
+    "pnpm:devPreinstall": "pnpm run wasm:build ; pnpm run wasi_hello_world:build",
     "wasm:build": "cd packages/wasm ; pnpm run build",
+    "wasi_hello_world:build": "cd packages/wasi_hello_world ; pnpm run build",
     "dev": "turbo run dev --parallel"
   },
   "keywords": [],

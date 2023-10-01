@@ -18,6 +18,9 @@ importers:
         specifier: workspace:*
         version: link:../../packages/wasm
     devDependencies:
+      '@bjorn3/browser_wasi_shim':
+        specifier: ^0.2.15
+        version: 0.2.15
       '@playwright/test':
         specifier: ^1.38.1
         version: 1.38.1
@@ -67,6 +70,8 @@ importers:
         specifier: ^4.4.9
         version: 4.4.9
 
+  packages/wasi_hello_world: {}
+
   packages/wasm: {}
 
 packages:
@@ -82,6 +87,10 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
+    dev: true
+
+  /@bjorn3/browser_wasi_shim@0.2.15:
+    resolution: {integrity: sha512-nIALnN3uq/UFCz1yyJ+VtbBOHQTAhFl/ZYs8LRxqrza58lb4s1RF5y0B5jaaaU++QNyN1v87kDiKIkrauJnadA==}
     dev: true
 
   /@esbuild/android-arm64@0.18.20:

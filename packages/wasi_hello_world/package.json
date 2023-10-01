@@ -1,0 +1,10 @@
+{
+  "name": "wasi_hello_world",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cargo watch -- pnpm run build",
+    "build": "cargo build --target wasm32-wasi && cp target/wasm32-wasi/debug/*.wasm ../../apps/sveltekit/static"
+  },
+  "sideEffects": false
+}

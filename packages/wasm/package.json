@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cargo watch -- wasm-pack build --target web",
+    "dev": "cargo watch -- pnpm run build",
     "build": "wasm-pack build --target web"
   },
   "files": [

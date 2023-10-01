@@ -29,6 +29,12 @@
 </script>
 
 <h1>Welcome to SvelteKit</h1>
+
+<nav>
+	<a href="/">home</a>
+	<a href="/wasi">wasi</a>
+</nav>
+
 <ul>
 	<li>{data.message} from {data.source}</li>
 	<li>{wasmMessage} from wasm</li>
