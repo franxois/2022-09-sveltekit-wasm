@@ -33,6 +33,7 @@
 <nav>
 	<a href="/">home</a>
 	<a href="/wasi">wasi</a>
+	<a href="/webcontainer">webcontainer</a>
 </nav>
 
 <ul>
