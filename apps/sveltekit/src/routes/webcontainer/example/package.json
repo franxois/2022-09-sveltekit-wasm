@@ -1,0 +1,12 @@
+{
+	"name": "example-app",
+	"type": "module",
+	"dependencies": {},
+	"scripts": {
+		"version": "node --version",
+		"test": "node --version ; node --test ."
+	},
+	"engines": {
+		"node": ">=18.18.0"
+	}
+}

@@ -1,6 +1,6 @@
 # Description
 
-Experimentation with SvelteKit & Wasm
+Experimentations with SvelteKit & Wasm
 
 # Notes
 
