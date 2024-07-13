@@ -5,7 +5,8 @@ import {
 	PreopenDirectory,
 	SyncOPFSFile,
 	OpenDirectory,
-	Directory
+	Directory,
+	Inode
 } from '@bjorn3/browser_wasi_shim';
 
 // Run only on client side
@@ -26,9 +27,10 @@ export async function load({ fetch, params }) {
 	// const file = await subDir.getFileHandle('helloworld.txt', { create: true });
 	// const handle = await file.createSyncAccessHandle(); // only usable in web workers
 
-	const rootPath = new PreopenDirectory('.', {
-		// helloworld: new Directory({ 'helloworld.txt': new SyncOPFSFile(handle) })
-	});
+	const rootPath = new PreopenDirectory(
+		'.',
+		new Map<string, Inode>([['helloworld', new Directory(new Map<string, Inode>([]))]])
+	);
 
 	let fds = [
 		new OpenFile(new File([])), // stdin

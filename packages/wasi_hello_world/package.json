@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cargo watch -- pnpm run build",
-    "build": "cargo build --target wasm32-wasi && cp target/wasm32-wasi/debug/*.wasm ../../apps/sveltekit/static"
+    "build": "cargo build --target wasm32-wasip1 && cp target/wasm32-wasip1/debug/*.wasm ../../apps/sveltekit/static"
   },
   "sideEffects": false
 }
