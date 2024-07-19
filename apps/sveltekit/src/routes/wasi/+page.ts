@@ -46,7 +46,7 @@ export async function load({ fetch, params }) {
 	});
 
 	try {
-		wasi.start(inst);
+		wasi.start(inst as { exports: { memory: WebAssembly.Memory; _start: () => unknown } });
 
 		console.log('stdout : ', new TextDecoder().decode(stdout.data));
 		console.log('stderr : ', new TextDecoder().decode(stderr.data));

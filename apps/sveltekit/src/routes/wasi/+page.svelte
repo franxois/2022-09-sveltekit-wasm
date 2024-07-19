@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 
 	onMount(() => {
-		console.log("mounted");
+		console.log("+page.svelte mounted");
 	});
 
 </script>

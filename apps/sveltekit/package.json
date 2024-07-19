@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --open",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "playwright test",
@@ -15,6 +15,7 @@
 	"devDependencies": {
 		"@bjorn3/browser_wasi_shim": "^0.3.0",
 		"@playwright/test": "^1.45.1",
+		"@sqlite.org/sqlite-wasm": "3.46.0-build2",
 		"@sveltejs/adapter-auto": "^3.2.2",
 		"@sveltejs/kit": "^2.5.18",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",

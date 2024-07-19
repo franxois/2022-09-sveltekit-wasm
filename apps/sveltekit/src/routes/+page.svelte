@@ -24,7 +24,7 @@
 	fetch('/api/hello')
 		.then((response) => response.json())
 		.then((data) => {
-			backendMessage = data.message;
+			backendMessage = `"${data.message}" when calling /api/hello`;
 		});
 </script>
 
@@ -34,6 +34,8 @@
 	<a href="/">home</a>
 	<a href="/wasi">wasi</a>
 	<a href="/webcontainer">webcontainer</a>
+	<a href="/webworker">webworker</a>
+	<a href="/sharedworker">sharedworker</a>
 </nav>
 
 <ul>
