@@ -18,3 +18,8 @@ cargo install wasm-pack
 ```bash
 wasmtime --dir .::/helloworld ./apps/sveltekit/static/wasi_hello_world.wasm
 ```
+
+# TODOs
+
+- [x] Wrap web worker with [Comlink](https://github.com/GoogleChromeLabs/comlink)
+- [x] test shared worker

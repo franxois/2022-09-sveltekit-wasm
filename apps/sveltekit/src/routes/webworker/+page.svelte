@@ -3,27 +3,31 @@
 	import type { PageData } from "./$types";
 	import { invalidateAll, goto } from '$app/navigation';
 	import { applyAction, deserialize } from '$app/forms';
+	import * as Comlink from 'comlink';
+	import type { HellosRepository } from "./my.worker";
 
+	let allHellos : {name:string,createdAt:string}[] = [];
+	let dbRepository: Comlink.Remote<HellosRepository>
 
-	export let data : PageData;
-
-	let allHellos : {name:string,createAt:string}[] = [];
-
-	onMount(() => {
+	onMount(async () => {
 		console.log("+page.svelte mounted");
 
-		console.log(data);
+		 const MyWorker = Comlink.wrap<typeof HellosRepository>( new Worker(new URL('./my.worker', import.meta.url), { type: 'module' }) );
 
-		data.worker.onmessage = async (e) => {
-			console.log('page received message :', e.data);
-			allHellos = e.data.allHellos;
-		}
+		 dbRepository = await new MyWorker();
+		 await dbRepository.initializeSQLite();
+
+
+		allHellos = await dbRepository.getAllHellos();
 	});
 
 	async function handleSubmit(event: { currentTarget: EventTarget & HTMLFormElement}) {
 		const formData = new FormData(event.currentTarget);
 
-		data.worker.postMessage({ name : formData.get('name')});
+		await dbRepository.insertName(formData.get('name') as string);
+		allHellos = await dbRepository.getAllHellos();
+
+		// data.worker.postMessage({ name : formData.get('name')});
 
 		// if (result.type === 'success') {
 		// 	// rerun all `load` functions, following the successful update
@@ -46,6 +50,6 @@
 
 <ul>
 	{#each allHellos as hello}
-		<li>"{hello.name}" {hello.createAt}</li>
+		<li>"{hello.name}" {hello.createdAt}</li>
 	{/each}
 </ul>

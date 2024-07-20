@@ -1,59 +1,61 @@
 // In `worker.js`.
 import sqlite3InitModule, { type Database, type Sqlite3Static } from '@sqlite.org/sqlite-wasm';
+import * as Comlink from 'comlink';
 
 const log = console.log;
 const error = console.error;
 
-let db: Database;
+export class HellosRepository {
+	constructor() {}
 
-const start = (sqlite3: Sqlite3Static) => {
-	log('Running SQLite3 version', sqlite3.version.libVersion);
-	db =
-		'opfs' in sqlite3
-			? new sqlite3.oo1.OpfsDb('/mydb.sqlite3')
-			: new sqlite3.oo1.DB('/mydb.sqlite3', 'ct');
-	log(
-		'opfs' in sqlite3
-			? `OPFS is available, created persisted database at ${db.filename}`
-			: `OPFS is not available, created transient database ${db.filename}`
-	);
-	// Your SQLite code here.
+	private db: Database | undefined = undefined;
 
-	db.exec(
-		`CREATE TABLE IF NOT EXISTS hellos(name TEXT , createAt TIMESTAMP DATETIME DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')))`
-	);
-};
-
-const initializeSQLite = async () => {
-	try {
-		log('Loading and initializing SQLite3 module...');
-		const sqlite3 = await sqlite3InitModule({ print: log, printErr: error });
-		log('Done initializing. Running demo...');
-		start(sqlite3);
-
-		const res = db.selectObjects('SELECT * FROM hellos order by createAt desc limit 10');
-		postMessage({ allHellos: res });
-	} catch (err) {
-		if (err instanceof Error) {
-			error('Initialization error:', err.name, err.message);
-		} else {
-			error('Initialization error:', err);
+	initializeSQLite = async () => {
+		try {
+			log('Loading and initializing SQLite3 module...');
+			const sqlite3 = await sqlite3InitModule({ print: log, printErr: error });
+			log('Done initializing. Running demo...');
+			this.start(sqlite3);
+		} catch (err) {
+			if (err instanceof Error) {
+				error('Initialization error:', err.name, err.message);
+			} else {
+				error('Initialization error:', err);
+			}
 		}
-	}
-};
+	};
 
-onmessage = (e) => {
-	console.log('worker received message', e.data);
+	start = (sqlite3: Sqlite3Static) => {
+		log('Running SQLite3 version', sqlite3.version.libVersion);
+		this.db =
+			'opfs' in sqlite3
+				? new sqlite3.oo1.OpfsDb('/mydb.sqlite3')
+				: new sqlite3.oo1.DB('/mydb.sqlite3', 'ct');
+		log(
+			'opfs' in sqlite3
+				? `OPFS is available, created persisted database at ${this.db.filename}`
+				: `OPFS is not available, created transient database ${this.db.filename}`
+		);
+		// Your SQLite code here.
 
-	if (e.data.name) {
-		db.prepare('INSERT INTO hellos(name) VALUES(?)').bind(e.data.name).stepFinalize();
-	}
+		this.db.exec(
+			`CREATE TABLE IF NOT EXISTS hellos(name TEXT , createdAt TIMESTAMP DATETIME DEFAULT(STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')))`
+		);
+	};
 
-	const res = db.selectObjects('SELECT * FROM hellos order by createAt desc limit 10');
+	insertName = (name: string) => {
+		console.log('insertName', name);
+		this.db?.prepare('INSERT INTO hellos(name) VALUES(?)').bind(name).stepFinalize();
+	};
 
-	console.log('All hellos:', res);
+	getAllHellos = () => {
+		console.log("I'm in getAllHellos", this.db);
 
-	postMessage({ allHellos: res });
-};
+		return this.db?.selectObjects('SELECT * FROM hellos order by createdAt desc limit 10') as {
+			name: string;
+			createdAt: string;
+		}[];
+	};
+}
 
-initializeSQLite();
+Comlink.expose(HellosRepository);

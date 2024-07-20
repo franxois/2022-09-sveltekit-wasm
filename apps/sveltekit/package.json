@@ -36,7 +36,8 @@
 		"vite": "^5.3.3"
 	},
 	"dependencies": {
-		"wasm": "workspace:*"
+		"wasm": "workspace:*",
+		"comlink": "^4.4.1"
 	},
 	"type": "module"
 }
