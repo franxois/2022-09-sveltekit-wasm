@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
 	import { invalidateAll, goto } from '$app/navigation';
 	import { applyAction, deserialize } from '$app/forms';
 	import * as Comlink from 'comlink';
@@ -12,11 +11,8 @@
 	onMount(async () => {
 		console.log('+page.svelte mounted');
 
-		const MyWorker = Comlink.wrap<typeof HellosRepository>(
-			new Worker(new URL('./my.worker', import.meta.url), { type: 'module' })
-		);
-
-		dbRepository = await new MyWorker();
+		const myWorker = new SharedWorker(new URL('./my.worker', import.meta.url), { type: 'module' });
+		dbRepository = Comlink.wrap<HellosRepository>(myWorker.port);
 		await dbRepository.initializeSQLite();
 
 		allHellos = await dbRepository.getAllHellos();
@@ -27,18 +23,13 @@
 
 		await dbRepository.insertName(formData.get('name') as string);
 		allHellos = await dbRepository.getAllHellos();
-
-		// data.worker.postMessage({ name : formData.get('name')});
-
-		// if (result.type === 'success') {
-		// 	// rerun all `load` functions, following the successful update
-		// 	await invalidateAll();
-		// }
 	}
 </script>
 
-<h1>Test WebWorker</h1>
+<h1>Test SharedWorker</h1>
 <p>Store values using SQLite wasm. Data is persisted across page reloads thanks to OPFS</p>
+
+<p>⚠️ this don't work with OPFS because it is not available in SharedWorker</p>
 
 <form method="POST" on:submit|preventDefault={handleSubmit}>
 	<label for="name">Your name</label>

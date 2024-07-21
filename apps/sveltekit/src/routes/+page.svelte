@@ -34,8 +34,9 @@
 	<a href="/">home</a>
 	<a href="/wasi">wasi</a>
 	<a href="/webcontainer">webcontainer</a>
-	<a href="/webworker">webworker</a>
-	<a href="/sharedworker">sharedworker</a>
+	<a href="/webworker">webworker sqlite</a>
+	<a href="/sharedworker_count">simple sharedworker</a>
+	<a href="/sharedworker_sqlite">sharedworker sqlite</a>
 </nav>
 
 <ul>

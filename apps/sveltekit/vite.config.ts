@@ -15,7 +15,7 @@ const viteServerConfig: Plugin = {
 	}
 };
 
-const config: UserConfig = {
+export default {
 	plugins: [viteServerConfig, sveltekit()],
 	build: {
 		target: 'esnext'
@@ -26,6 +26,4 @@ const config: UserConfig = {
 	optimizeDeps: {
 		exclude: ['@sqlite.org/sqlite-wasm']
 	}
-};
-
-export default config;
+} satisfies UserConfig;
