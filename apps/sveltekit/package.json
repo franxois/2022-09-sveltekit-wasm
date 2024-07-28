@@ -37,7 +37,9 @@
 	},
 	"dependencies": {
 		"wasm": "workspace:*",
-		"comlink": "^4.4.1"
+		"comlink": "^4.4.1",
+		"wasi_component": "workspace:*",
+		"@bytecodealliance/preview2-shim": "^0.16.4"
 	},
 	"type": "module"
 }
