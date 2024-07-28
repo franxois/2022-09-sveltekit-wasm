@@ -5,6 +5,7 @@ export const load: LayoutLoad = () => {
 		sections: [
 			{ slug: '/', title: 'home' },
 			{ slug: '/wasi', title: 'wasi' },
+			{ slug: '/wasi_component', title: 'wasi component' },
 			{ slug: '/webcontainer', title: 'webcontainer' },
 			{ slug: '/webworker', title: 'webworker sqlite' },
 			{ slug: '/sharedworker_count', title: 'simple sharedworker' },
