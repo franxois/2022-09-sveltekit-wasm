@@ -6,13 +6,17 @@
 import { build, files, prerendered, version } from '$service-worker';
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 
-const log = console.log;
-const error = console.error;
+const log = (...args) => {
+	console.log('[ServiceWorker]', ...args);
+};
+const error = (...args) => {
+	console.error('[ServiceWorker]', ...args);
+};
 
 const start = (sqlite3) => {
-	log('Running SQLite3 version', sqlite3.version.libVersion);
+	log('[ServiceWorker] Running SQLite3 version', sqlite3.version.libVersion);
 
-	console.log('start:', { sqlite3 });
+	log('start:', { sqlite3 });
 
 	const db =
 		'opfs' in sqlite3
@@ -47,8 +51,8 @@ const respondWith = (event: FetchEvent, data: unknown) => {
 	);
 };
 
-console.log('serviceworker:', 'service worker loaded');
-console.log('serviceworker:', { build, files, prerendered, version });
+log('service worker loaded');
+log({ build, files, prerendered, version });
 
 self.addEventListener('install', (event) => {
 	// Make the script refresh after reload, not only after closing all tabs

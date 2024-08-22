@@ -21,7 +21,7 @@ export default {
 		target: 'esnext'
 	},
 	server: {
-		fs: { allow: ['../../packages/wasm/pkg'] }
+		fs: { allow: ['../../packages/wasm/pkg', '../../packages/component/dist/'] }
 	},
 	optimizeDeps: {
 		exclude: ['@sqlite.org/sqlite-wasm']
