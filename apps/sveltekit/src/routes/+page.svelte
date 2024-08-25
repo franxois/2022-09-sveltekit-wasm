@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import init, { get_message } from 'wasm';
+	import { helloWorld } from 'wasi_component';
 
 	export let data: PageData;
 
 	let wasmMessage: string;
+	let wasiComponentMessage: string = helloWorld();
 
 	let backendMessage: string;
 
@@ -31,8 +33,9 @@
 <h1>Welcome to SvelteKit</h1>
 
 <ul>
-	<li>{data.message} from {data.source}</li>
-	<li>{wasmMessage} from wasm</li>
+	<li>"{data.message}" from {data.source}</li>
+	<li>"{wasmMessage}" from wasm</li>
+	<li>"{wasiComponentMessage}" from WASI component</li>
 	{#if backendMessage !== undefined}
 		<li>{backendMessage}</li>
 	{/if}
