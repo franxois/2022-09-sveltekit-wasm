@@ -16,6 +16,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasi_hello_world"
+version = "0.1.0"
+
+[[package]]
 name = "wit-bindgen-rt"
 version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

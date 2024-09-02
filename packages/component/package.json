@@ -2,7 +2,7 @@
   "name": "wasi_component",
   "scripts": {
     "dev": "cargo watch -- pnpm run build",
-    "build": "cargo component build --release && jco transpile target/wasm32-wasip1/release/component.wasm -o dist",
+    "build": "cargo component build --release && jco transpile ../../target/wasm32-wasip1/release/component.wasm -o dist",
     "test": "node test.js"
   },
   "type": "module",
