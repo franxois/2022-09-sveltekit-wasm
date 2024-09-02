@@ -1,45 +1,46 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { WebContainer } from '@webcontainer/api';
+	import { WebContainer, type FileSystemTree } from '@webcontainer/api';
 	import type { PageData } from './$types';
 	import { xterm } from './xterm';
 
 	export let data: PageData;
 
+	let webContainerInstance: WebContainer;
 	let output: string = '';
 
-	onMount(async () => {
-		const webcontainerInstance = await WebContainer.boot();
-
-		console.log(webcontainerInstance);
-		await webcontainerInstance.mount(data.files);
+	const runProcess = async () => {
+		webContainerInstance = await WebContainer.boot();
+		await webContainerInstance.mount(data.files);
 
 		// const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
 
-		const res = await webcontainerInstance.spawn('pnpm', ['run', 'test']);
-		const reader = res.output.getReader();
+		const shellProcess = await webContainerInstance.spawn('pnpm', ['run', 'test']);
 
-		while (true) {
-			const { done, value } = await reader.read();
+		shellProcess.output.pipeTo(
+			new WritableStream({
+				write: (chunk) => {
+					output += chunk;
+				}
+			})
+		);
 
-			console.log(value);
+		const exitCode = await shellProcess.exit;
+		console.log({ exitCode });
+	};
 
-			output += value;
+	onMount(() => {
+		// Run without await on purpose so we can return an unmount function
+		runProcess();
 
-			console.log(done);
-			console.log(webcontainerInstance);
-
-			if (done) {
-				// We enter never here. TODO : teardown on route change
-				webcontainerInstance.teardown();
-				console.log(webcontainerInstance);
-				break;
-			}
-		}
+		return () => {
+			webContainerInstance && webContainerInstance.teardown();
+		};
 	});
 </script>
 
 <h1>Test WebContainer</h1>
+<p><i>Please wait for the webContainer to start</i></p>
 <div use:xterm={output} />
 
 <style>
