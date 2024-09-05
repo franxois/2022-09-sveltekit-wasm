@@ -1,7 +1,7 @@
 import sqlite3InitModule, { type Database, type Sqlite3Static } from '@sqlite.org/sqlite-wasm';
 
-const log = console.log;
-const error = console.error;
+const log = (...args: any) => console.log('[HellosRepository]', ...args);
+const error = (...args: any) => console.error('[HellosRepository]', ...args);
 
 export class HellosRepository {
 	constructor() {}
@@ -14,6 +14,13 @@ export class HellosRepository {
 			const sqlite3 = await sqlite3InitModule({ print: log, printErr: error });
 			log('Done initializing. Running demo...');
 			this.start(sqlite3);
+
+			let opfsRoot = await navigator.storage.getDirectory();
+			log({ opfsRoot });
+
+			for await (let [name, handle] of opfsRoot) {
+				log('ls:', { name, handle });
+			}
 		} catch (err) {
 			if (err instanceof Error) {
 				error('Initialization error:', err.name, err.message);

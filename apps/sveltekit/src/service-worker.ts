@@ -2,6 +2,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="esnext" />
 /// <reference lib="webworker" />
+/// <reference lib="DOM.AsyncIterable" />
 
 import { build, files, prerendered, version } from '$service-worker';
 import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
@@ -68,5 +69,17 @@ self.addEventListener('fetch', (event) => {
 
 			respondWith(event, response);
 		}
+	}
+});
+
+navigator.storage.getDirectory().then(async (opfsRoot) => {
+	for await (let [name, handle] of opfsRoot) {
+		log('ls:', { name, handle });
+	}
+
+	const directoryHandle = await opfsRoot.getDirectoryHandle('db', { create: true });
+
+	for await (let [name, handle] of directoryHandle) {
+		log('ls:', { name, handle });
 	}
 });
