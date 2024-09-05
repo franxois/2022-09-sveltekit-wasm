@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { WebContainer, type FileSystemTree } from '@webcontainer/api';
 	import type { PageData } from './$types';
-	import { xterm } from './xterm';
+	import { xterm } from '../../actions/xterm';
 
 	export let data: PageData;
 
@@ -11,7 +11,9 @@
 
 	const runProcess = async () => {
 		webContainerInstance = await WebContainer.boot();
+		console.log('WebContainer started');
 		await webContainerInstance.mount(data.files);
+		console.log("Mounted");
 
 		// const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
 

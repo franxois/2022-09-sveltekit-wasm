@@ -4,11 +4,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- *  List all files in ./example and create a FileSystemTree for WebContainer
+ *  List all files in ./example_projects/simple_esm and create a FileSystemTree for WebContainer
  * */
 
-export const getFiles = async (): Promise<FileSystemTree> => {
-	const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'example');
+export const getFiles = async (projectName: string = 'simple_esm'): Promise<FileSystemTree> => {
+	const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), projectName);
 
 	const files = await readdir(__dirname, { recursive: true });
 
