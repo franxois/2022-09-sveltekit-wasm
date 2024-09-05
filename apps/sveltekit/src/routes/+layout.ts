@@ -7,6 +7,7 @@ export const load: LayoutLoad = () => {
 			{ slug: '/wasi', title: 'wasi' },
 			// { slug: '/wasi_component', title: 'wasi component' },
 			{ slug: '/webcontainer', title: 'webcontainer' },
+			{ slug: '/quickjs', title: 'QuickJS' },
 			{ slug: '/webworker', title: 'webworker sqlite' },
 			{ slug: '/sharedworker_count', title: 'simple sharedworker' },
 			{ slug: '/sharedworker_sqlite', title: 'sharedworker sqlite' }

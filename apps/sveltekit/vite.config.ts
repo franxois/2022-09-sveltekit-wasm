@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { Plugin, UserConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 const viteServerConfig: Plugin = {
 	// Used for webcontainer but those headers are also necessary for
@@ -16,7 +17,11 @@ const viteServerConfig: Plugin = {
 };
 
 export default {
-	plugins: [viteServerConfig, sveltekit()],
+	plugins: [
+		viteServerConfig,
+		sveltekit(),
+		nodePolyfills({ include: ['buffer'] }) // Used for @sebastianwessel/quickjs
+	],
 	build: {
 		target: 'esnext'
 	},
