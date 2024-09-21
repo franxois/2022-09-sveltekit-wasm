@@ -5,6 +5,7 @@ export const load: LayoutLoad = () => {
 		sections: [
 			{ slug: '/', title: 'home' },
 			{ slug: '/wasi', title: 'wasi' },
+			{ slug: '/quickjs-wasi', title: 'QuickJS Ng wasi' },
 			// { slug: '/wasi_component', title: 'wasi component' },
 			{ slug: '/webcontainer', title: 'webcontainer' },
 			{ slug: '/quickjs', title: 'QuickJS' },

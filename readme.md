@@ -29,3 +29,5 @@ wasmtime --dir .::/helloworld ./apps/sveltekit/static/wasi_hello_world.wasm
 - [x] Wrap web worker with [Comlink](https://github.com/GoogleChromeLabs/comlink)
 - [x] test shared worker
 - [ ] test https://github.com/quickjs-ng/quickjs wasi binary
+
+wget https://github.com/quickjs-ng/quickjs/releases/download/v0.6.0/qjs-wasi.wasm
