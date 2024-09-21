@@ -2,5 +2,6 @@
 
 members = [
     "packages/component",
-    "packages/wasi_hello_world"
+    "packages/wasi_hello_world",
+    "packages/wasm"
 ]
