@@ -13,7 +13,7 @@
 		webContainerInstance = await WebContainer.boot();
 		console.log('WebContainer started');
 		await webContainerInstance.mount(data.files);
-		console.log("Mounted");
+		console.log('Mounted');
 
 		// const packageJSON = await webcontainerInstance.fs.readFile('package.json', 'utf-8');
 
@@ -22,7 +22,7 @@
 		shellProcess.output.pipeTo(
 			new WritableStream({
 				write: (chunk) => {
-					output += chunk;
+					output = chunk;
 				}
 			})
 		);

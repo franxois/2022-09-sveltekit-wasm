@@ -8,7 +8,6 @@ export const xterm: Action<HTMLElement, string> = (node: HTMLElement, data: stri
 
 	return {
 		update(data: string) {
-			term.clear();
 			term.write(data);
 		}
 	};
