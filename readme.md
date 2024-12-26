@@ -31,4 +31,4 @@ wasmtime --dir .::/helloworld ./apps/sveltekit/static/wasi_hello_world.wasm
 - [x] test https://github.com/quickjs-ng/quickjs wasi binary
 - [ ] https://antmicro.github.io/jswasi/
 
-wget https://github.com/quickjs-ng/quickjs/releases/download/v0.6.0/qjs-wasi.wasm
+wget https://github.com/quickjs-ng/quickjs/releases/download/v0.8.0/qjs-wasi.wasm

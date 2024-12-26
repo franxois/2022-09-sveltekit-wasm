@@ -1,2 +1,3 @@
 import { greeting } from './greetings.js';
-console.log(greeting);
+
+console.log(navigator.userAgent, ':', greeting);
