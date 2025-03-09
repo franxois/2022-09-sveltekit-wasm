@@ -43,7 +43,7 @@
 
 <h1>Test WebContainer</h1>
 <p><i>Please wait for the webContainer to start</i></p>
-<div use:xterm={output} />
+<div use:xterm={output}></div>
 
 <style>
 	@import '@xterm/xterm/css/xterm.css';

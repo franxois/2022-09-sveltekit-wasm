@@ -37,7 +37,7 @@
 		];
 		let wasi = new WASI(args, env, fds);
 
-		let wasm = await WebAssembly.compileStreaming(fetch('qjs-wasi-0.8.0.wasm'));
+		let wasm = await WebAssembly.compileStreaming(fetch('qjs-wasi-0.9.0.wasm'));
 		let inst = await WebAssembly.instantiate(wasm, {
 			wasi_snapshot_preview1: wasi.wasiImport
 		});
@@ -62,7 +62,7 @@
 
 <h1>Test QuickJs-ng wasi</h1>
 
-<div use:xterm={output} />
+<div use:xterm={output}></div>
 
 <style>
 	@import '@xterm/xterm/css/xterm.css';
