@@ -37,7 +37,7 @@
 		];
 		let wasi = new WASI(args, env, fds);
 
-		let wasm = await WebAssembly.compileStreaming(fetch('qjs-wasi-0.9.0.wasm'));
+		let wasm = await WebAssembly.compileStreaming(fetch('qjs-wasi-0.10.1.wasm'));
 		let inst = await WebAssembly.instantiate(wasm, {
 			wasi_snapshot_preview1: wasi.wasiImport
 		});
